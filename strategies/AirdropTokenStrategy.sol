@@ -2,229 +2,6 @@
 
 pragma solidity =0.6.8;
 
-/**
- * @dev Wrappers over Solidity's arithmetic operations with added overflow
- * checks.
- *
- * Arithmetic operations in Solidity wrap on overflow. This can easily result
- * in bugs, because programmers usually assume that an overflow raises an
- * error, which is the standard behavior in high level programming languages.
- * `SafeMath` restores this intuition by reverting the transaction when an
- * operation overflows.
- *
- * Using this library instead of the unchecked operations eliminates an entire
- * class of bugs, so it's recommended to use it always.
- */
-library SafeMath {
-  /**
-   * @dev Returns the addition of two unsigned integers, with an overflow flag.
-   *
-   * _Available since v3.4._
-   */
-  function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-    uint256 c = a + b;
-    if (c < a) return (false, 0);
-    return (true, c);
-  }
-
-  /**
-   * @dev Returns the substraction of two unsigned integers, with an overflow flag.
-   *
-   * _Available since v3.4._
-   */
-  function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-    if (b > a) return (false, 0);
-    return (true, a - b);
-  }
-
-  /**
-   * @dev Returns the multiplication of two unsigned integers, with an overflow flag.
-   *
-   * _Available since v3.4._
-   */
-  function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-    // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
-    // benefit is lost if 'b' is also tested.
-    // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
-    if (a == 0) return (true, 0);
-    uint256 c = a * b;
-    if (c / a != b) return (false, 0);
-    return (true, c);
-  }
-
-  /**
-   * @dev Returns the division of two unsigned integers, with a division by zero flag.
-   *
-   * _Available since v3.4._
-   */
-  function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-    if (b == 0) return (false, 0);
-    return (true, a / b);
-  }
-
-  /**
-   * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.
-   *
-   * _Available since v3.4._
-   */
-  function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
-    if (b == 0) return (false, 0);
-    return (true, a % b);
-  }
-
-  /**
-   * @dev Returns the addition of two unsigned integers, reverting on
-   * overflow.
-   *
-   * Counterpart to Solidity's `+` operator.
-   *
-   * Requirements:
-   *
-   * - Addition cannot overflow.
-   */
-  function add(uint256 a, uint256 b) internal pure returns (uint256) {
-    uint256 c = a + b;
-    require(c >= a, "SafeMath: addition overflow");
-    return c;
-  }
-
-  /**
-   * @dev Returns the subtraction of two unsigned integers, reverting on
-   * overflow (when the result is negative).
-   *
-   * Counterpart to Solidity's `-` operator.
-   *
-   * Requirements:
-   *
-   * - Subtraction cannot overflow.
-   */
-  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-    require(b <= a, "SafeMath: subtraction overflow");
-    return a - b;
-  }
-
-  /**
-   * @dev Returns the multiplication of two unsigned integers, reverting on
-   * overflow.
-   *
-   * Counterpart to Solidity's `*` operator.
-   *
-   * Requirements:
-   *
-   * - Multiplication cannot overflow.
-   */
-  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-    if (a == 0) return 0;
-    uint256 c = a * b;
-    require(c / a == b, "SafeMath: multiplication overflow");
-    return c;
-  }
-
-  /**
-   * @dev Returns the integer division of two unsigned integers, reverting on
-   * division by zero. The result is rounded towards zero.
-   *
-   * Counterpart to Solidity's `/` operator. Note: this function uses a
-   * `revert` opcode (which leaves remaining gas untouched) while Solidity
-   * uses an invalid opcode to revert (consuming all remaining gas).
-   *
-   * Requirements:
-   *
-   * - The divisor cannot be zero.
-   */
-  function div(uint256 a, uint256 b) internal pure returns (uint256) {
-    require(b > 0, "SafeMath: division by zero");
-    return a / b;
-  }
-
-  /**
-   * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-   * reverting when dividing by zero.
-   *
-   * Counterpart to Solidity's `%` operator. This function uses a `revert`
-   * opcode (which leaves remaining gas untouched) while Solidity uses an
-   * invalid opcode to revert (consuming all remaining gas).
-   *
-   * Requirements:
-   *
-   * - The divisor cannot be zero.
-   */
-  function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-    require(b > 0, "SafeMath: modulo by zero");
-    return a % b;
-  }
-
-  /**
-   * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
-   * overflow (when the result is negative).
-   *
-   * CAUTION: This function is deprecated because it requires allocating memory for the error
-   * message unnecessarily. For custom revert reasons use {trySub}.
-   *
-   * Counterpart to Solidity's `-` operator.
-   *
-   * Requirements:
-   *
-   * - Subtraction cannot overflow.
-   */
-  function sub(
-    uint256 a,
-    uint256 b,
-    string memory errorMessage
-  ) internal pure returns (uint256) {
-    require(b <= a, errorMessage);
-    return a - b;
-  }
-
-  /**
-   * @dev Returns the integer division of two unsigned integers, reverting with custom message on
-   * division by zero. The result is rounded towards zero.
-   *
-   * CAUTION: This function is deprecated because it requires allocating memory for the error
-   * message unnecessarily. For custom revert reasons use {tryDiv}.
-   *
-   * Counterpart to Solidity's `/` operator. Note: this function uses a
-   * `revert` opcode (which leaves remaining gas untouched) while Solidity
-   * uses an invalid opcode to revert (consuming all remaining gas).
-   *
-   * Requirements:
-   *
-   * - The divisor cannot be zero.
-   */
-  function div(
-    uint256 a,
-    uint256 b,
-    string memory errorMessage
-  ) internal pure returns (uint256) {
-    require(b > 0, errorMessage);
-    return a / b;
-  }
-
-  /**
-   * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-   * reverting with custom message when dividing by zero.
-   *
-   * CAUTION: This function is deprecated because it requires allocating memory for the error
-   * message unnecessarily. For custom revert reasons use {tryMod}.
-   *
-   * Counterpart to Solidity's `%` operator. This function uses a `revert`
-   * opcode (which leaves remaining gas untouched) while Solidity uses an
-   * invalid opcode to revert (consuming all remaining gas).
-   *
-   * Requirements:
-   *
-   * - The divisor cannot be zero.
-   */
-  function mod(
-    uint256 a,
-    uint256 b,
-    string memory errorMessage
-  ) internal pure returns (uint256) {
-    require(b > 0, errorMessage);
-    return a % b;
-  }
-}
-
 interface IAscensionStrategy {
   function validateProposal(address[] calldata targets, uint256[] calldata values)
     external
@@ -628,47 +405,31 @@ abstract contract Ownable is Context {
   }
 }
 
-contract BuyTokenStrategy is Ownable, IAscensionStrategy {
+contract AirdropTokenStrategy is Ownable, IAscensionStrategy {
   //VERSION 1.0.0
   //STATE
 
-  using SafeMath for uint256;
+  string public name = "Airdrop Token Strategy";
 
-  struct TokenPurchase {
-    address token;
-    uint256 blockNumber;
-    uint256 amountPurchased;
-    mapping(address => bool) hasWithdrawn;
-  }
-
-  string public name = "Buy Token Strategy";
-
-  uint256 private constant TOTAL_SUPPLY = 14400000e9;
-  uint256 public purchaseCount;
-
-  address private constant burn = 0x3333333333333333333333333333333333333333;
+  mapping(address => bool) private validTokens;
   address private ascend;
   address private uniswapV2Router;
-  address private pair;
-
-  mapping(address => bool) validTokens;
-  mapping(uint256 => TokenPurchase) allTokenPurchases;
+  address private distributor;
 
   //EVENTS
   event ProposalValidated(address[] targets, uint256[] values);
   event ProposalExecuted(string name, uint256 ethAmount, uint256 tokenAmount);
   event ReceivedEth(address from, uint256 amount);
-  event tokensWithdrawn(uint256 id, address beneficiary, uint256 amount);
 
   //CONSTRUCTOR
   constructor(
     address _ascend,
-    address _router,
-    address _pair
+    address _distributor,
+    address _router
   ) public {
     ascend = _ascend;
+    distributor = _distributor;
     uniswapV2Router = _router;
-    pair = _pair;
   }
 
   //RECEIVE ETH
@@ -676,10 +437,23 @@ contract BuyTokenStrategy is Ownable, IAscensionStrategy {
     emit ReceivedEth(msg.sender, msg.value);
   }
 
-  //OWNABLE
+  //OWNER
   function validateToken(address _token) external onlyOwner() {
-    require(_token != address(0));
     validTokens[_token] = true;
+  }
+
+  function invalidateToken(address _token) external onlyOwner() {
+    validTokens[_token] = false;
+  }
+
+  function setDistributor(address _distributor) external onlyOwner() {
+    require(_distributor != address(0));
+    distributor = _distributor;
+  }
+
+  function setUniswapV2Router(address _router) external onlyOwner() {
+    require(_router != address(0));
+    uniswapV2Router = _router;
   }
 
   //EXTERNAL
@@ -699,9 +473,6 @@ contract BuyTokenStrategy is Ownable, IAscensionStrategy {
     override
     returns (bool)
   {
-    //increment purchaseCount
-    purchaseCount++;
-
     //set Token to be purchased
     address token = _targets[0];
 
@@ -713,32 +484,18 @@ contract BuyTokenStrategy is Ownable, IAscensionStrategy {
     path[0] = IUniswapV2Router02(uniswapV2Router).WETH();
     path[1] = token;
 
-    IUniswapV2Router02(uniswapV2Router).swapExactETHForTokensSupportingFeeOnTransferTokens{
-      value: ethAmount
-    }(
-      0, //slippage is unavoidable
-      path,
-      address(this),
-      block.timestamp
-    );
+    uint256[] memory amounts =
+      IUniswapV2Router02(uniswapV2Router).swapExactETHForTokens{ value: ethAmount }(
+        0, //slippage is unavoidable
+        path,
+        distributor, //all tokens from swap go to distributor to be airdropped
+        block.timestamp
+      );
 
-    //how many tokens did we receive?
-    uint256 tokenAmount = IERC20(token).balanceOf(address(this));
+    //transfer ASCEND to owner
+    IERC20(ascend).transfer(owner(), IERC20(ascend).balanceOf(address(this)));
 
-    //set tokenPurchase info
-    TokenPurchase memory newPurchase =
-      TokenPurchase({ token: token, blockNumber: block.number, amountPurchased: tokenAmount });
-
-    allTokenPurchases[purchaseCount - 1] = newPurchase;
-
-    emit ProposalExecuted(name, ethAmount, tokenAmount);
+    emit ProposalExecuted(name, ethAmount, amounts[1]);
     return true;
-  }
-
-  function withdraw(address _account, uint256 _id) external {
-    require(
-      !allTokenPurchases[_id].hasWithdrawn[_msgSender()],
-      "BuyTokenStrategy::withdraw: You have already withdrawn for this event"
-    );
   }
 }
